@@ -6,7 +6,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html --public-url 'https://alxndrpsclt.github.io/virtualctl/'",
     "start": "parcel serve src/index.html --host 0.0.0.0 --port 9999",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

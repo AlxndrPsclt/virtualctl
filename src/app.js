@@ -1,4 +1,4 @@
-const OSC = require('osc-js')
+//const OSC = require('osc-js')
 //const plugin = new OSC.WebsocketClientPlugin({ host: '192.168.8.123', port: 8080 })
 var plugin = {};
 var osc ={};
@@ -51,22 +51,53 @@ function removeKnobs() {
     }
 }
 
+async function sendOSC(path, value) {
+  try {
+		const ip = document.getElementById('hostaddr').value;
+    const response = await fetch(`http://${ip}:8080/osc`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ path, value })
+    })
+
+    if (!response.ok) {
+      console.error('Failed to send OSC:', await response.text())
+    }
+  } catch (err) {
+    console.error('HTTP request failed:', err)
+  }
+}
+
 //osc.open({ port: 9000 })
 
 createKnobs(128);
 // Add event listeners to all knobs
-for (let i = 1; i <= 128; i++) {
-  const knob = document.getElementById(`knob${i}`);
-  if (knob) {
-    knob.addEventListener("input", (event) => {
-      const value = parseFloat(event.target.value);
-      const path = `/virtualctl/K${String(i.toString(16)).padStart(2, "0")}`; // e.g., /virtualctl/k01
-      console.log(`Sending OSC: ${path} ${value}`);
+//for (let i = 1; i <= 128; i++) {
+//  const knob = document.getElementById(`knob${i}`);
+//  if (knob) {
+//    knob.addEventListener("input", (event) => {
+//      const value = parseFloat(event.target.value);
+//      const path = `/virtualctl/K${String(i.toString(16)).padStart(2, "0")}`; // e.g., /virtualctl/k01
+//      console.log(`Sending OSC: ${path} ${value}`);
+//
+//      // Send the OSC message
+//      const message = new OSC.Message(path, parseFloat(value));
+//      osc.send(message)
+//    });
+//  }
+//}
 
-      // Send the OSC message
-      const message = new OSC.Message(path, parseFloat(value));
-      osc.send(message)
-    });
+for (let i = 1; i <= 128; i++) {
+  const knob = document.getElementById(`knob${i}`)
+  if (knob) {
+    knob.addEventListener('input', (event) => {
+      const value = parseFloat(event.target.value)
+      const path = `/virtualctl/K${String(i.toString(16)).padStart(2, '0')}`
+      console.log(`Sending OSC: ${path} ${value}`)
+      sendOSC(path, value)
+    })
   }
 }
 

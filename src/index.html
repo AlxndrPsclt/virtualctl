@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json" />
   <script type="module" src="../lib/webaudio-controls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/osc-js/lib/osc.min.js"></script>
 </head>
 <body>
   <div class="app">
     <!-- Generate a 4x5 grid of knobs -->
     <div class="menu">
       <button id="reloadbutton" onclick="reload()">RELOAD</button>
-      <input type="text" id="hostaddr" name="hostaddr" value="192.168.8.123" required minlength="4" size="10" />
+      <input type="text" id="hostaddr" name="hostaddr" value="192.168.8.154" required minlength="4" size="10" />
     </div>
     <div class="knobs">
     </div>
@@ -38,7 +39,7 @@
       window.location.reload();
     }
   </script>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./app.bundle.js"></script>
 </body>
 </html>
 

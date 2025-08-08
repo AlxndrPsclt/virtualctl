@@ -19,11 +19,11 @@
     "osc-js": "^2.4.1"
   },
   "devDependencies": {
-    "@parcel/packager-raw-url": "^2.13.0",
-    "@parcel/transformer-webmanifest": "^2.13.0",
+    "@parcel/packager-raw-url": "^2.15.4",
+    "@parcel/transformer-webmanifest": "^2.15.4",
     "buffer": "^6.0.3",
     "events": "^3.3.0",
-    "parcel": "^2.13.0",
+    "parcel": "^2.15.4",
     "process": "^0.11.10",
     "serve": "^14.2.4"
   }
